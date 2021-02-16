@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo of</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="header :: header"></header>
+
+    <div class="row">
+        <div th:insert="sidebar :: sidebar-1"></div>
+
+        <div class="content">
+            <div class="inner-content">
+
+                <form method="POST" action="/login">
+                    <b>Login</b><br>
+                    register of type login: John + password: john<br><br>
+                    <div>
+                        <input name="username" type="text" placeholder="Username"
+                               autofocus="true"/>
+                        <input name="password" type="password" placeholder="Password"/>
+                        <button type="submit">Log In</button>
+                        <br>
+                        <a href="/register"><b>Register</b></a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="sidebar-2">
+            <div class="inner-sidebar-2">
+                Sidebar #2
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="inner-footer">Footer</div>
+    </div>
+
+</div>
+
+</body>
+</html>

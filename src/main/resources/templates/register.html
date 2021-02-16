@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo of</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="header :: header"></header>
+
+    <div class="row">
+        <div th:insert="sidebar :: sidebar-1"></div>
+
+        <div class="content">
+            <div class="inner-content">
+
+                <b>Safe registration</b><br>
+
+                <table>
+                    <tr>
+                        <td><input autofocus="true" id="usernameSafe" placeholder="username"></td>
+                    </tr>
+
+                    <tr>
+                        <td><input id="passwordSafe" placeholder="password" type="password"></td>
+                        <td><input id="passwordSafeConf" placeholder="confirm password" type="password"></td>
+                        <td th:text="${passwordError}"></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <button id="regBtnSafe">Register</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+        <div class="sidebar-2">
+            <div class="inner-sidebar-2">
+                Sidebar #2
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="inner-footer">Footer</div>
+    </div>
+
+</div>
+
+<script>
+    let usernameSafe = document.getElementById("usernameSafe");
+    let passwordSafe = document.getElementById("passwordSafe");
+    let passwordSafeConf = document.getElementById("passwordSafeConf");
+
+    let regBtnSafe = document.getElementById("regBtnSafe");
+
+    regBtnSafe.onclick = function () {
+
+        let userRequest = {
+            username: usernameSafe.value,
+            password: passwordSafe.value,
+            passwordConf: passwordSafeConf.value
+        };
+
+        if(passwordSafe.value != passwordSafeConf.value) {
+            alert("Passwords are not equals");
+            return;
+        }
+
+        if(usernameSafe.value=="") {
+            alert("Username could not be empty");
+            return;
+        }
+
+        fetch('/register', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(userRequest)   //возврат объекта в формате JSON
+        }).then(function () {
+            alert("User created");
+            window.location = "/login"
+        });
+    }
+</script>
+
+</body>
+</html>

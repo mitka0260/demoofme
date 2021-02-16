@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo of Simple Mathematics</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="header :: header"></header>
+
+    <div class="row">
+        <div th:insert="sidebar :: sidebar-1"></div>
+
+        <div class="content">
+            <div class="inner-content">
+                <b>Demo of simple mathematics</b><br><br>
+
+                <b>Max value:</b><br>
+                enter integers into inputs<br>
+                <input autofocus id="a" placeholder="integer" size="5"><input id="b" placeholder="integer" size="5">
+                <button id="mathMaxBtn">Press Me</button>
+                <div id="answer">Here you'll see the answer</div>
+                <hr>
+                <script>
+                    let answer = document.getElementById("answer");
+                    let answerFunction = function (resultBody) {
+                        answer.innerText = resultBody;
+                    }
+                    let button = document.getElementById("mathMaxBtn");
+                    let a = document.getElementById("a");
+                    let b = document.getElementById("b");
+                    button.onclick = function () {
+                        console.log(a.value + " - " + b.value);
+                        fetch('/math/max?aKey=' + a.value
+                            + '&bKey=' + b.value)
+                            .then(result => result.text())
+                            .then(answerFunction);
+                    }
+                </script>
+
+                <br>
+                <b>Fibonacci numbers</b><br>
+                enter integer value<br>
+                <b>what Fibonacci nr you wish?</b><br>
+                <input id="fibIndex" placeholder="Fib index" size="5">
+                <button id="fibBtn">Press me</button>
+                <div id="fibAnswer">Here you'll see the answer</div>
+                <hr>
+                <script>
+                    let fibAnswer = document.getElementById("fibAnswer");
+                    let answerFunctionFib = function (resultBody) {
+                        fibAnswer.innerText = resultBody;
+                    }
+                    let fibBtn = document.getElementById("fibBtn");
+                    let a1 = document.getElementById("fibIndex");
+
+                    fibBtn.onclick = function () {
+                        fetch('/math/Fibonacci?n=' + a1.value)
+                            .then(result => result.text())
+                            .then(answerFunctionFib);
+                    }
+                </script>
+
+                <br>
+                <b>Your value is even or not?</b><br>
+                enter integer value:<br>
+                <input id="isEvenNr" placeholder="is even nr" size="5">
+                <button id="evenBtn">Press Me</button>
+                <div id="evenAnswer">Here you'll see the answer</div>
+                <hr>
+                <script>
+                    let evenAnswer = document.getElementById("evenAnswer");
+                    let answerFunctionEven = function (resultBody) {
+                        evenAnswer.innerText = resultBody;
+                    }
+                    let evenBtn = document.getElementById("evenBtn");
+                    let a2 = document.getElementById("isEvenNr");
+
+                    evenBtn.onclick = function () {
+                        fetch('/math/isEven?number=' + a2.value)
+                            .then(result => result.text())
+                            .then(answerFunctionEven);
+                    }
+                </script>
+
+
+            </div>
+        </div>
+
+        <div class="sidebar-2">
+            <div class="inner-sidebar-2">
+                Sidebar #2
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="inner-footer">Footer</div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo of bank</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="header :: header"></header>
+
+    <div class="row">
+        <div th:insert="sidebar :: sidebar-1"></div>
+
+        <div class="content">
+            <div class="inner-content">
+                <b>Demo of work with database</b><br><br>
+
+                Here you can create new iban:<br>
+                enter desired iban:<br>
+                <input id="newIbanNr" placeholder="input new user's iban">
+                <button id="createAccountBtn">Create account with this iban</button>
+                <script>
+                    let createAccountBtn = document.getElementById("createAccountBtn");
+                    let newIban = document.getElementById("newIbanNr");
+                    createAccountBtn.onclick = function () {
+                        console.log(newIban.value);
+                        fetch('/bank/createAccountDB?iban=' + newIban.value)
+                            .then(result => result.text());
+                    }
+                </script>
+                <hr>
+                <table>
+                    <tr>
+                        what iban balance you wish to know
+                        <td><input id="ibanGetBalance" placeholder="enter iban" size="10"></td>
+                        <td>
+                            <button id="getBalanceBtn">Press to get this iban balance</button>
+                        </td>
+                        <td>
+                            <div id="ibanBalance">Here you will see the balance of entered iban</div>
+                        </td>
+                    </tr>
+                </table>
+                <script>
+                    let getBalanceBtn = document.getElementById("getBalanceBtn");
+                    let ibanIndex = document.getElementById("ibanGetBalance");
+                    getBalanceBtn.onclick = function () {
+                        fetch('/bank/getAccountBalanceDB?iban=' + ibanIndex.value)
+                            .then(result => result.text())
+                            .then(answerFunction3);
+                    }
+
+                    let ibanBalance = document.getElementById("ibanBalance");
+                    let answerFunction3 = function (resultBody) {
+                        ibanBalance.innerText = resultBody;
+                    }
+                </script>
+                <hr>
+                <table>
+                    <tr>
+                        enter iban to which you wish to deposit money<br>
+                        enter how much money you wish to deposit to this iban<br>
+                        <td><input id="ibanDeposit" placeholder="what iban(nr) for money" size="18"></td>
+                        <td><input id="howMuch" placeholder="how much you wish" size="18"></td>
+                        <td>
+                            <button id="depositMoneyBtn">Press to deposit money</button>
+                        </td>
+                    </tr>
+                </table>
+                <script>
+                    let depositMoneyBtn = document.getElementById("depositMoneyBtn");
+                    let ibanNr = document.getElementById("ibanDeposit");
+                    let howMuch = document.getElementById("howMuch");
+                    depositMoneyBtn.onclick = function () {
+                        console.log(ibanNr.value);
+                        console.log(howMuch.value);
+                        fetch('/bank/depositMoneyDB?iban=' + ibanNr.value + '&howMuch=' + howMuch.value)
+                            .then(result => result.text());
+                    }
+                </script>
+                <hr>
+
+
+                <table>
+                    <tr>
+                        enter iban from which you wish withdraw money<br>
+                        enter how much money you wish to withdraw<br>
+                        <td><input id="ibanWithdraw" placeholder="iban(nr) from money" size="18"></td>
+                        <td><input id="howMuchWithdraw" placeholder="how much you wish" size="18"></td>
+                        <td>
+                            <button id="withdrawMoneyBtn">Press to withdraw money</button>
+                        </td>
+                    </tr>
+                </table>
+                <script>
+                    let withdrawMoneyBtn = document.getElementById("withdrawMoneyBtn");
+                    let ibanWithdraw = document.getElementById("ibanWithdraw");
+                    let howMuchWithdraw = document.getElementById("howMuchWithdraw");
+                    withdrawMoneyBtn.onclick = function () {
+                        console.log(ibanWithdraw.value);
+                        console.log(howMuchWithdraw.value);
+                        fetch('/bank/withDrawMoneyDB?iban=' + ibanWithdraw.value + '&howMuch=' + howMuchWithdraw.value)
+                            .then(result => result.text());
+                    }
+                </script>
+                <hr>
+                <tabel>
+                    <tr>
+                        enter iban from which you wish to withdraw money<br>
+                        enter iban to which you wish to deposit the sum of money<br>
+                        enter the sum of money you wish to transfer between these ibans<br>
+                        <td><input id="ibanFrom" placeholder="ibanFrom" size="18"></td>
+                        <td><input id="ibanTo" placeholder="iban to" size="18"></td>
+                        <td><input id="howMuchTrans" placeholder="how much" size="18"></td>
+                        <td>
+                            <button id="transBtn">Transfer money</button>
+                        </td>
+                    </tr>
+                </tabel>
+                <script>
+                    let ibanFrom = document.getElementById("ibanFrom");
+                    let ibanTo = document.getElementById("ibanTo");
+                    let howMuchTrans = document.getElementById("howMuchTrans");
+                    let transBtn = document.getElementById("transBtn");
+                    transBtn.onclick = function () {
+                        console.log(ibanFrom.value);
+                        console.log(ibanTo.value);
+                        console.log(howMuchTrans.value);
+                        fetch('/bank/transferMoneyDB?ibanFrom=' + ibanFrom.value + '&ibanTo=' + ibanTo.value + '&howMuch=' + howMuchTrans.value)
+                            .then(result => result.text());
+                    }
+                </script>
+                <hr>
+                You can see all ibans and their balances:<br>
+                <button id="showAll" onclick="showAll()">show all accounts</button>
+
+            </div>
+        </div>
+
+        <div class="sidebar-2">
+            <div class="inner-sidebar-2">
+                <div id="allAccounts">You'll see all accounts here</div>
+
+                <script>
+                    function showAll() {
+                        fetch('/bank/accountsDB')
+                            .then(result => result.text())
+                            .then(showAllFunction);
+                    }
+
+                    let allAccounts = document.getElementById("allAccounts");
+                    let showAllFunction = function (resultBody) {
+                        allAccounts.innerText = resultBody;
+                    }
+                </script>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="inner-footer">Footer</div>
+    </div>
+
+</div>
+
+</body>
+</html>

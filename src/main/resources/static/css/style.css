@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Times New Roman";
+}
+
+body {
+    color: black;
+    font-size: 20px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+    text-align: center;
+}
+
+.row:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.row { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.row { display: block; }
+/* close commented backslash hack */
+
+.header {
+    margin-bottom: 10px;
+}
+
+.inner-header {
+    background: #eeece1;
+    height: 100px;
+}
+
+.content {
+    width: 60%;
+    float: left;
+}
+
+.inner-content {
+    background: #fed9ad;
+    min-height: 500px;
+}
+
+.sidebar-1 {
+    width: 15%;
+    float: left;
+    padding-right: 10px;
+}
+
+.inner-sidebar-1 {
+    background: #ff9c37;
+    min-height: 500px;
+}
+
+.sidebar-2 {
+    width: 25%;
+    float: left;
+    padding-left: 10px;
+}
+
+.inner-sidebar-2 {
+    background: #ff9c37;
+    min-height: 500px;
+}
+
+.footer {
+    margin-top: 10px;
+}
+
+.inner-footer {
+    background: #eb5f00;
+    height: 200px;
+}
+
+
+#about {
+    text-align: center;
+    font-size: 1.5em;
+    line-height: 100px;
+    margin-bottom: 10px;
+}
+
+#about > a {
+    color: #fff;
+}
+
+#about > a:hover {
+    color: #b0b0b0;
+    text-decoration: underline;
+}
+
+#about > a:not(:last-child) {
+    margin-right: 3%;
+}
+
+.questionMe {
+    padding-top: 7%;
+    font-size: xxx-large;
+    font-family: "Times New Roman", sans-serif;
+}
+
+.answerMe {
+    text-align: center;
+    font-size: 50px;
+    width: 100px;
+    height: 100px;
+}
+
+.checkMeAnswer {
+    margin-top: 30px;
+
+}
+
+.statistics {
+    padding-top: 50px;
+    font-size: 35px;
+}
+
+. {
+    text-align: center;
+    font-size: 50px;
+    width: 100px;
+    height: 100px;
+}

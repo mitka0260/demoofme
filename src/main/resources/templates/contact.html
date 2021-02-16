@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper">
+
+    <header th:insert="header :: header"></header>
+
+    <div class="row">
+        <div th:insert="sidebar :: sidebar-1"></div>
+
+        <div class="content">
+            <div class="inner-content">
+                contact me
+            </div>
+        </div>
+
+        <div class="sidebar-2">
+            <div class="inner-sidebar-2">
+                Sidebar #2
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="inner-footer">Footer</div>
+    </div>
+
+</div>
+
+</body>
+</html>

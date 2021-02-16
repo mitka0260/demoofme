@@ -1,0 +1,21 @@
+<div th:fragment="header">
+    <div class="header">
+
+        <div class="inner-header" id="about"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+            <a href="/"><img align="left" alt="Demo" height="100px" src="/images/Java-Logo.png"></a>
+            <a href="/">Main</a>
+            <a href="/contact">Contact</a>
+
+            <span sec:authentication="name">Bob</span>
+            <span sec:authorize="!isAuthenticated()">
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            </span>
+
+            <span sec:authorize="isAuthenticated()">
+                <a href="/logout">Logout</a>
+            </span>
+
+        </div>
+    </div>
+</div>
