@@ -6,7 +6,8 @@
             <a href="/">Main</a>
             <a href="/contact">Contact</a>
 
-            <span sec:authentication="name">Bob</span>
+            <span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>
+<!--            <span sec:authentication="name"></span>-->
             <span sec:authorize="!isAuthenticated()">
                 <a href="/login">Login</a>
                 <a href="/register">Register</a>

@@ -17,7 +17,11 @@
 
         <div class="content">
             <div class="inner-content">
-                <center><b>Homepage</b><br><br><br>
+                <center><b>Homepage</b><br>
+                    <div th:if="${param.logout}" class="error">
+                        You have been logged out.
+                    </div>
+                    <br><br>
                 <a href="/math">Mathematics</a><br>
                 <a href="/bank">Bank</a></center>
 <!--                                Обработка исключений<br>-->
