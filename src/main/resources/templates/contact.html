@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Contact</title>
@@ -16,7 +17,35 @@
 
         <div class="content">
             <div class="inner-content">
-                contact me
+
+                Your message will be sent to my email<br><br>
+
+                <label for="name">Your name:</label><br>
+                <input id="name" name="name" placeholder="Your name" type="text" autofocus><br><br>
+
+                <label for="message1">Your message:</label><br>
+                <textarea id="message1" name="message1" placeholder="Your message" type="text" rows="20" cols="100"></textarea><br><br>
+
+                <button id="sendMessage" type="submit" value="Submit">Send</button>
+
+                <div id="afterSending"></div>
+
+                <script>
+                    let afterSending = document.getElementById("afterSending");
+                    let afterSendingFunction = function (resultBody) {
+                        afterSending.innerText = resultBody;
+                    }
+                    let button = document.getElementById("sendMessage");
+                    let a = document.getElementById("name");
+                    let b = document.getElementById("message1");
+                    button.onclick = function () {
+                        fetch('/sendEmail?name=' + a.value
+                            + '&message1=' + b.value)
+                            .then(result => result.text())
+                            .then(afterSendingFunction);
+                    }
+                </script>
+
             </div>
         </div>
 
